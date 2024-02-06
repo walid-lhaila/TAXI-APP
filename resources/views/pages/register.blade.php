@@ -55,7 +55,7 @@
 
             <div id="forms-container" class="flex overflow-hidden transition-transform transform ease-in-out duration-500">
                 <div id="passagerForm" class="w-full">
-                <form action="{{url('register')}}" method="POST" class="grid grid-cols-1 gap-6 mt-8 md:grid-cols-2 ">
+                <form action="{{url('registerPassenger')}}" method="POST" class="grid grid-cols-1 gap-6 mt-8 md:grid-cols-2 ">
                     @csrf
                     <div>
                         <label class="block mb-2 text-sm text-gray-700 ">First Name</label>
