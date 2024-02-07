@@ -1,8 +1,8 @@
     <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DriversController;
-    use App\Http\Controllers\PagesController;
 use App\Http\Controllers\PassengerController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,12 +22,15 @@ use Illuminate\Support\Facades\Route;
     });
                                     // PAGES
     Route::get('index', [DriversController::class ,'index']);
-    Route::get('login', [PagesController::class ,'login']);
-    Route::get('register', [pagesController::class ,'register']);
+    Route::get('login', [AuthController::class ,'login']);
+    Route::get('register', [AuthController::class ,'register']);
 
                                 // ADD DRIVER AND PASSENGER
     Route::post('register', [DriversController::class , 'store']);
     Route::post('registerPassenger', [PassengerController::class, 'passengerStore']);
+
+                                // LOGIN
+    Route::post('login', [AuthController::class , 'login']);
 
                                     // ADMIN
     Route::get('admin', [AdminController::class , 'index']);
@@ -39,6 +42,10 @@ use Illuminate\Support\Facades\Route;
 
                                     // PASSENGER
     Route::get('passenger', [PassengerController::class , 'index']);
+
+    Route::get('admin', [AdminController::class , 'index'])->name('admin.admin');
+    Route::get('driver', [DriversController::class, 'index'])->name('driver.driver');
+    Route::get('passenger', [PassengerController::class , 'index'])->name('passenger.passenger');
 
 
 

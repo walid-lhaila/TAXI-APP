@@ -47,10 +47,11 @@
                         </div>
         
                         <div class="mt-8">
-                            <form>
+                            <form method="POST" action="{{url('login')}}">
+                                @csrf
                                 <div>
-                                    <label for="email" class="block mb-2 text-sm text-gray-700">Email Address</label>
-                                    <input type="email" name="email" id="email" placeholder="example@example.com" class="block w-full px-4 py-2 mt-2 text-gray-200 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-200 dark:text-gray-300 dark:border-gray-700 focus:border-yellow-400 dark:focus:border-yellow-400 focus:ring-yellow-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                                    <label for="username" class="block mb-2 text-sm text-gray-700">Email Address</label>
+                                    <input type="text" name="username" id="email" placeholder="example@example.com" class="block w-full px-4 py-2 mt-2 text-gray-200 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-200 dark:text-gray-300 dark:border-gray-700 focus:border-yellow-400 dark:focus:border-yellow-400 focus:ring-yellow-400 focus:outline-none focus:ring focus:ring-opacity-40" />
                                 </div>
         
                                 <div class="mt-6">
@@ -63,7 +64,7 @@
                                 </div>
         
                                 <div class="mt-6">
-                                    <button class="w-full px-4 py-2 tracking-wide text-white transition-colors duration-300 transform bg-yellow-500 rounded-lg hover:bg-yellow-400 focus:outline-none focus:bg-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+                                    <button type="submit" class="w-full px-4 py-2 tracking-wide text-white transition-colors duration-300 transform bg-yellow-500 rounded-lg hover:bg-yellow-400 focus:outline-none focus:bg-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50">
                                         Sign in
                                     </button>
                                 </div>
