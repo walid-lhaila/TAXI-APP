@@ -13,6 +13,7 @@ class drivers extends Model implements Authenticatable
     use HasFactory;
     protected $fillable = [
         'name',
+        'vehicule',
         'phone',
         'matricule',
         'role',

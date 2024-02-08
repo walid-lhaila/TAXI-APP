@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\drivers;
 use App\Models\passenger;
 use Illuminate\Http\Request;
 
@@ -20,7 +21,9 @@ class PassengerController extends Controller
      */
     public function create()
     {
-       
+        $drivers = drivers::all();
+        
+       return view('passenger.reserve' , compact('drivers'));
     }
 
     /**

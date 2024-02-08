@@ -31,6 +31,7 @@ class DriversController extends Controller
     {
         $driver = drivers::create([
             'name'=> $request->input('name'),
+            'vehicule'=> $request->input('vehicule'),
             'phone'=> $request->input('phone'),
             'matricule'=> $request->input('matricule'),
             'role'=>"driver",

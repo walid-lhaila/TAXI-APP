@@ -4,8 +4,6 @@
     <title>Recipe</title>
     <script src="https://cdn.tailwindcss.com"></script>
 
-    
-
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
      crossorigin=""/>
@@ -13,9 +11,6 @@
      <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
      crossorigin=""></script>
-
-
-     <script src="https://cdn.jsdelivr.net/npm/graphhopper@2.0/dist/graphhopper-client.bundle.js"></script>
 
 </head>
 <body class="h-screen">
@@ -73,17 +68,59 @@
 
 <section class="">
     <div class="bg-white ">
-        <div class="flex justify-center">
-            <div id="map" class="bg-cover h-[665px] lg:block lg:w-2/3">
+        <div class="flex justify-center gap-10">
+            <div id="map" class="bg-cover h-[665px] lg:w-2/3">
                 
             </div>
-            <div class="flex items-center w-full max-w-md px-6 mx-auto lg:w-2/6">
-                <div class="flex-1">
-                    <div class="text-center">
-                        <p class="mt-3 text-gray-500 dark:text-gray-800 font-bold text-3xl">Order A Ride</p>
+            <div>
+                    <div class="flex justify-center mt-5">
+                        <h1 class="font-bold text-3xl text-black">Choose Driver</h1>
                     </div>
+
+
+            @foreach ($drivers as $driver)
+                <div class="flex w-[577px] overflow-hidden bg-white rounded-lg shadow-lg  mt-5">
+                    <div class="w-1/3 bg-cover" style="background-image: url('img/vehicule.jpg')"></div>
+                    <div class="w-2/3 p-4 md:p-4">
+                        <h1 class="text-xl font-bold text-gray-800 ">{{$driver->name}}</h1>
+                        <div class="flex gap-16">
+                            <p class="mt-2 text-sm text-gray-600 dark:text-gray-500"><span class="font-medium text-gray-700">Vehicule : </span>{{$driver->vehicule}}</p>
+                            <p class="mt-2 text-sm text-gray-600 dark:text-gray-500"><span class="font-medium text-gray-700">Télé : </span>{{$driver->phone}}</p>
+                        </div>
+                        <div class="flex mt-2 item-center">
+                            <svg class="w-5 h-5 text-gray-700 fill-current dark:text-yellow-300" viewBox="0 0 24 24">
+                                <path d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" />
+                            </svg>
+                
+                            <svg class="w-5 h-5 text-gray-700 fill-current dark:text-yellow-300" viewBox="0 0 24 24">
+                                <path d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" />
+                            </svg>
+                
+                            <svg class="w-5 h-5 text-gray-700 fill-current dark:text-yellow-300" viewBox="0 0 24 24">
+                                <path d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" />
+                            </svg>
+                
+                            <svg class="w-5 h-5 text-gray-500 fill-current dark:text-yellow-300" viewBox="0 0 24 24">
+                                <path d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" />
+                            </svg>
+                
+                            <svg class="w-5 h-5 text-gray-300 fill-current" viewBox="0 0 24 24">
+                                <path d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" />
+                            </svg>
+                        </div>
+                
+                        <div class="flex justify-between mt-3 item-center">
+                            <h1 class="text-lg font-bold text-gray-700 dark:text-gray-800 md:text-xl">$28</h1>
+                            <button class="px-2 py-1 text-xs font-bold text-white uppercase transition-colors duration-300 transform bg-yellow-400 rounded dark:bg-yellow-400 hover:bg-yellow-500 dark:hover:bg-yellow-500 focus:outline-none focus:bg-gray-700 dark:focus:bg-gray-600">Reserve</button>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+            </div>
+            <div class="flex  w-full max-w-sm px-8 mx-auto lg:w-2/6">
+                <div class="flex-1">
                     <div class="mt-8">
-                        <form id="routeForm">
+                        <form>
                             <div>
                                 <label for="depart" class="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-600">Place of support</label>
                                 <div class="relative">
@@ -92,7 +129,7 @@
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15a6 6 0 1 0 0-12 6 6 0 0 0 0 12Zm0 0v6M9.5 9A2.5 2.5 0 0 1 12 6.5"/>
                                           </svg>
                                     </div>
-                                    <input type="text" id="place-of-support" class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-600 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Place of support">
+                                    <input type="text" id="email-address-icon" class="bg-gray-50 border border-gray-300 text-gray-100 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Place of support">
                                 </div>                            
                             </div>
                             <div class="mt-6">
@@ -104,14 +141,8 @@
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.8 14h0a7 7 0 1 0-11.5 0h0l.1.3.3.3L12 21l5.1-6.2.6-.7.1-.2Z"/>
                                           </svg>
                                     </div>
-                                    <input type="text" id="destination" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-600 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Destination">
+                                    <input type="text" id="email-address-icon" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Destination">
                                 </div>                            
-                            </div>
-    
-                            <div class="mt-6">
-                                <button type="button" onclick="calculateRoute()" class="w-full px-4 py-2 tracking-wide text-white transition-colors duration-300 transform bg-yellow-500 rounded-lg hover:bg-yellow-400 focus:outline-none focus:bg-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50">
-                                    Search
-                                </button>
                             </div>
     
                         </form>
@@ -130,36 +161,6 @@
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
-
-function calculateRoute() {
-        var placeOfSupportInput = document.getElementById('place-of-support').value;
-        var destinationInput = document.getElementById('destination').value;
-
-        // Use GraphHopper API to calculate the route
-        var ghRouting = new GraphHopper.Routing({
-            key: 'YOUR_GRAPHHOPPER_API_KEY',
-            host: 'https://graphhopper.com/api/1',
-            vehicle: 'car',
-            elevation: false,
-        });
-
-        ghRouting.addPoint(new GHInput(placeOfSupportInput));
-        ghRouting.addPoint(new GHInput(destinationInput));
-
-        ghRouting.doRequest()
-            .then(function (json) {
-                var path = json.paths[0];
-                var latLngs = path.points.coordinates.map(function (point) {
-                    return L.latLng(point[1], point[0]);
-                });
-
-                var route = L.polyline(latLngs, { color: 'blue' }).addTo(map);
-                map.fitBounds(route.getBounds());
-            })
-            .catch(function (error) {
-                console.error('Error calculating the route:', error);
-            });
-    }
 
 </script>
 </html>

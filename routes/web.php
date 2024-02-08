@@ -42,6 +42,13 @@ use Illuminate\Support\Facades\Route;
 
                                     // PASSENGER
     Route::get('passenger', [PassengerController::class , 'index']);
+    Route::get('reserve' ,[PassengerController::class , 'create']);
+
+
+
+
+
+
 
     Route::get('admin', [AdminController::class , 'index'])->name('admin.admin');
     Route::get('driver', [DriversController::class, 'index'])->name('driver.driver');
