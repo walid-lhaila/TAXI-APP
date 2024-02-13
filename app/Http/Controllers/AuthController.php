@@ -19,6 +19,7 @@ class AuthController extends Controller
         $username = $request->input('username');
         $password = $request->input('password');
         
+    
         $admin = Admin::where('username', $username)->first();
         if ($admin && $password === $admin->password){
             Auth::login($admin);

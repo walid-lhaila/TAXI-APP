@@ -73,49 +73,85 @@
                 
             </div>
             <div>
-                    <div class="flex justify-center mt-5">
-                        <h1 class="font-bold text-3xl text-black">Choose Driver</h1>
-                    </div>
+                    <div class="flex flex-col justify-center mt-5">
+                        <h1 class="font-bold text-3xl text-center text-black">Choose Driver</h1>
 
+                        <!--
+  This example requires Tailwind CSS v2.0+
 
-            @foreach ($drivers as $driver)
-                <div class="flex w-[577px] overflow-hidden bg-white rounded-lg shadow-lg  mt-5">
-                    <div class="w-1/3 bg-cover" style="background-image: url('img/vehicule.jpg')"></div>
-                    <div class="w-2/3 p-4 md:p-4">
-                        <h1 class="text-xl font-bold text-gray-800 ">{{$driver->name}}</h1>
-                        <div class="flex gap-16">
-                            <p class="mt-2 text-sm text-gray-600 dark:text-gray-500"><span class="font-medium text-gray-700">Vehicule : </span>{{$driver->vehicule}}</p>
-                            <p class="mt-2 text-sm text-gray-600 dark:text-gray-500"><span class="font-medium text-gray-700">Télé : </span>{{$driver->phone}}</p>
+  The alpine.js code is *NOT* production ready and is included to preview
+  possible interactivity
+-->
+<div class="px-8 py-12 flex justify-center bg-white w-[500px]">
+    <div class="w-full max-w-xl mx-auto">
+      
+  <fieldset x-data="window.Components.radioGroup({ initialCheckedIndex: 0 })" x-init="init()">
+    <legend class="sr-only">
+      Server size
+    </legend>
+    <form action="">
+            <div class="space-y-4">
+                <div class="cards">
+                    @foreach($driversWithRoutes as $driver)
+                     <div class="py-2 ">
+                    <div class="flex items-center ps-4 border border-gray-200 rounded dark:border-gray-200 shadow-md">
+                    <input id="bordered-radio-1" type="radio" value="" name="bordered-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                    <label for="bordered-radio-1" class="w-full py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                        <div>
+                            <div class="">
+                                <div class="flex justify-between">
+                                    <div class="flex gap-3">
+                                        <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80" alt="">
+                                        <h1 class="mt-1 text-black font-mediume text-lg ">{{$driver->name}}</h1>
+                                    </div>
+                                    <div>
+                                        <h1 class="text-black font-medium px-2 mt-2"> Phone: <span class="text-gray-500">{{$driver->phone}}</span></h1>
+                                    </div>
+                                </div>
+                                <div class="mt-2 text-black font-medium ml-2">Type de Vehicule : <span class="text-gray-500">{{$driver->vehicule}}</span></div>
+                            </div>
+                            <div class="flex gap-5 justify-center mt-3">
+                                @foreach($driver->routes as $route)
+                                <div class="flex gap-1 mt-1">
+                                    <div><svg class="w-6 h-6 text-yellow-500 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15a6 6 0 1 0 0-12 6 6 0 0 0 0 12Zm0 0v6M9.5 9A2.5 2.5 0 0 1 12 6.5"/>
+                                      </svg></div>
+                                    <div class="mt-1 text-gray-600">{{$route->deparature}}</div>
+                                </div>
+                               
+                                <div> 
+                                    <img class="h-[40px] w-[90px]" src="{{url('img/arrow.png')}}" alt="">
+                                </div>
+
+                                  <div class="flex gap-1 mt-1">
+                                    <div><svg class="w-6 h-6 text-yellow-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.8 14h0a7 7 0 1 0-11.5 0h0l.1.3.3.3L12 21l5.1-6.2.6-.7.1-.2Z"/>
+                                      </svg></div>
+                                    <div class="mt-1 text-gray-600">{{$route->destination}}</div>
+                                  </div>
+                                
+                                @endforeach
+                            </div>
                         </div>
-                        <div class="flex mt-2 item-center">
-                            <svg class="w-5 h-5 text-gray-700 fill-current dark:text-yellow-300" viewBox="0 0 24 24">
-                                <path d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" />
-                            </svg>
-                
-                            <svg class="w-5 h-5 text-gray-700 fill-current dark:text-yellow-300" viewBox="0 0 24 24">
-                                <path d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" />
-                            </svg>
-                
-                            <svg class="w-5 h-5 text-gray-700 fill-current dark:text-yellow-300" viewBox="0 0 24 24">
-                                <path d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" />
-                            </svg>
-                
-                            <svg class="w-5 h-5 text-gray-500 fill-current dark:text-yellow-300" viewBox="0 0 24 24">
-                                <path d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" />
-                            </svg>
-                
-                            <svg class="w-5 h-5 text-gray-300 fill-current" viewBox="0 0 24 24">
-                                <path d="M12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27Z" />
-                            </svg>
-                        </div>
-                
-                        <div class="flex justify-between mt-3 item-center">
-                            <h1 class="text-lg font-bold text-gray-700 dark:text-gray-800 md:text-xl">$28</h1>
-                            <button class="px-2 py-1 text-xs font-bold text-white uppercase transition-colors duration-300 transform bg-yellow-400 rounded dark:bg-yellow-400 hover:bg-yellow-500 dark:hover:bg-yellow-500 focus:outline-none focus:bg-gray-700 dark:focus:bg-gray-600">Reserve</button>
-                        </div>
-                    </div>
+                    </label>
                 </div>
-            @endforeach
+                    </div>
+                @endforeach
+            </div>
+        </div>
+        <div class="flex justify-center mt-3 ">
+            <button class="bg-yellow-400 text-white px-4 py-1 rounded hover:bg-yellow-300 duration-300 hover:text-white">Reserve</button>
+        </div>
+    </form>
+  </fieldset>
+
+    </div>
+  </div>
+                    </div>
+
+
+          
             </div>
             <div class="flex  w-full max-w-sm px-8 mx-auto lg:w-2/6">
                 <div class="flex-1">
@@ -152,6 +188,11 @@
         </div>
     </div>
 </section>
+
+
+
+
+
 </body>
 <script>
     var map = L.map('map');

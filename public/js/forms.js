@@ -10,3 +10,5 @@ document.getElementById('chauffeur-btn').addEventListener('click', function () {
     passagerForm.classList.add('hidden');
     chauffeurForm.classList.remove('hidden');
 });
+
+

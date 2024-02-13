@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\drivers;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use SebastianBergmann\CodeCoverage\Driver\Driver;
 
 class DriversController extends Controller
@@ -13,7 +14,8 @@ class DriversController extends Controller
      */
     public function index()
     {
-        return view('driver.driver');
+            $drivers = drivers::all();
+        return view('driver.driver', compact('drivers'));
     }
 
     /**
@@ -22,6 +24,10 @@ class DriversController extends Controller
     public function create()
     {
         //
+    }
+    public function profileUpdate() {
+
+        return view('driver.profile');
     }
 
     /**
@@ -38,7 +44,7 @@ class DriversController extends Controller
             'username'=> $request->input('username'),
             'password'=> $request->input('password'),
         ]);
-        return redirect('login')->with('sucsses', 'Your Account Created Successfuly');
+        return redirect('route')->with('sucsses', 'Your Account Created Successfuly');
     }
 
     /**
@@ -60,9 +66,31 @@ class DriversController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, drivers $drivers)
-    {
-        //
+    public function updateProfile(Request $request, drivers $drivers)
+    {  
+        $driver = auth()->user();
+
+        $request->validate([
+            'new-name' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('drivers')->ignore($driver->id),
+            ],
+            // Add validation rules for other fields as needed
+        ]);
+    
+        $driver->update([
+            'name' => $request->input('new-name'),
+            'vehicule' => $request->input('new_vehicule'),
+            'image' => $request->input('new_image'),
+            'phone' => $request->input('new_phone'),
+            'matricule' => $request->input('new_matricule'),
+            'username' => $request->input('new_username'),
+            // Update other fields as needed
+        ]);
+    
+        return redirect('route')->with('success', 'Profile Updated Successfully');
     }
 
     /**

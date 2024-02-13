@@ -113,10 +113,10 @@
                             <label class="block mb-2 text-sm text-gray-700 ">Type de Vehicule</label>
                                 <select name="vehicule" class="block w-full px-5 py-3 mt-2 text-gray-800 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-300 dark:bg-gray-100 dark:text-gray-800 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" id="">
                                     <option value="" disabled selected>Type vehicule</option>
-                                    <option value="petites voitures">petites voitures</option>
-                                    <option value="voitures compactes">voitures compactes</option>
-                                    <option value="grosses voitures">grosses voitures</option>
-                                    <option value="voitures de luxe">voitures de luxe</option>
+                                    <option value="petites voitures">Petites voitures</option>
+                                    <option value="voitures compactes">Voitures compactes</option>
+                                    <option value="grosses voitures">Grosses voitures</option>
+                                    <option value="voitures de luxe">Voitures de luxe</option>
                                 </select>                            
                         </div>
     

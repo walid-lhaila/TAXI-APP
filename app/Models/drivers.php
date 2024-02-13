@@ -20,4 +20,12 @@ class drivers extends Model implements Authenticatable
         'username',
         'password',
     ];
+
+    public function routes()
+{
+    return $this->hasMany(Route::class, 'driver_id');
+}
+
+   
+   
 }

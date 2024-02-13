@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DriversController;
 use App\Http\Controllers\PassengerController;
+use App\Http\Controllers\RouteController;
 use Illuminate\Support\Facades\Route;
 
     /*
@@ -30,31 +31,32 @@ use Illuminate\Support\Facades\Route;
     Route::post('registerPassenger', [PassengerController::class, 'passengerStore']);
 
                                 // LOGIN
-    Route::post('login', [AuthController::class , 'login']);
-
+    Route::post('login', [AuthController::class , 'login'])->name('login');
                                     // ADMIN
     Route::get('admin', [AdminController::class , 'index']);
+
+                                    // 
+    // Route::post('create-route', [RouteController::class, 'store'])->name('create.route');
 
 
                                     // DRIVER
     Route::get('driver', [DriversController::class, 'index']);
+    Route::get('profile', [DriversController::class, 'profileUpdate']);
+    // Route::get('route', [RouteController::class, 'index']);
 
 
                                     // PASSENGER
     Route::get('passenger', [PassengerController::class , 'index']);
     Route::get('reserve' ,[PassengerController::class , 'create']);
 
-
-
-
-
-
-
-    Route::get('admin', [AdminController::class , 'index'])->name('admin.admin');
-    Route::get('driver', [DriversController::class, 'index'])->name('driver.driver');
-    Route::get('passenger', [PassengerController::class , 'index'])->name('passenger.passenger');
+        Route::get('admin', [AdminController::class , 'index'])->name('admin.admin');
+        Route::get('driver', [DriversController::class, 'index'])->name('driver.driver');
+        Route::get('passenger', [PassengerController::class , 'index'])->name('passenger.passenger');
 
 
 
 
                                     
+        Route::middleware(['auth'])->group(function () {
+            Route::put('driver/profile/update', [DriversController::class, 'updateProfile'])->name('driver.profile.update');
+        });
