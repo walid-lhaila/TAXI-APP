@@ -44,7 +44,7 @@ class DriversController extends Controller
             'username'=> $request->input('username'),
             'password'=> $request->input('password'),
         ]);
-        return redirect('route')->with('sucsses', 'Your Account Created Successfuly');
+        return redirect('/login')->with('sucsses', 'Your Account Created Successfuly');
     }
 
     /**
@@ -71,26 +71,28 @@ class DriversController extends Controller
         $driver = auth()->user();
 
         $request->validate([
-            'new-name' => [
-                'required',
-                'string',
-                'max:255',
-                Rule::unique('drivers')->ignore($driver->id),
-            ],
-            // Add validation rules for other fields as needed
+            'new_name' => 'required|string|max:255',
+            'new_username' => 'required|string|max:255',
+            'new_matricule' => 'required|string|max:255',
+            'new_phone' => 'required|string|max:255',
+            'new_vehicle' => 'required|string|max',
+
         ]);
     
-        $driver->update([
-            'name' => $request->input('new-name'),
-            'vehicule' => $request->input('new_vehicule'),
-            'image' => $request->input('new_image'),
-            'phone' => $request->input('new_phone'),
-            'matricule' => $request->input('new_matricule'),
-            'username' => $request->input('new_username'),
+        $driver = auth()->user();
+        $driver->name = $request->input('new_name');
+        $driver->username = $request->input('new_username');
+        $driver->matricule = $request->input('new_matricule');
+        $driver->phone = $request->input('new_phone');
+        $driver->vehicule = $request->input('new_vehicule');
+
+
+        $driver->save();
+            
             // Update other fields as needed
-        ]);
+        
     
-        return redirect('route')->with('success', 'Profile Updated Successfully');
+        return redirect('driver')->with('success', 'Profile Updated Successfully');
     }
 
     /**

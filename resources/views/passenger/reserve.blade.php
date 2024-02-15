@@ -50,7 +50,7 @@
                         <h3 class="mx-2 text-gray-700 dark:text-gray-200 lg:hidden">Khatab wedaa</h3>
                     </button>
 
-                    <h1 class="font-medium text-gray-100 ">Walid Lhaila</h1>
+                    <h1 class="font-medium text-gray-100 "> </h1>
                 </div>
                 <div>
                     <a href="{{url('/')}}">
@@ -74,6 +74,7 @@
             </div>
             <div>
                     <div class="flex flex-col justify-center mt-5">
+                        <a href="passenger"><button class="bg-gray-200 text-black  hover:rounded-lg px-4 py-1  duration-300 ">Back</button></a>
                         <h1 class="font-bold text-3xl text-center text-black">Choose Driver</h1>
 
                         <!--
@@ -89,7 +90,9 @@
     <legend class="sr-only">
       Server size
     </legend>
-    <form action="">
+
+    
+    <form id="driversRoute" action="">
             <div class="space-y-4">
                 <div class="cards">
                     @foreach($driversWithRoutes as $driver)
@@ -140,19 +143,23 @@
                 @endforeach
             </div>
         </div>
-        <div class="flex justify-center mt-3 ">
-            <button class="bg-yellow-400 text-white px-4 py-1 rounded hover:bg-yellow-300 duration-300 hover:text-white">Reserve</button>
+        <div class="flex justify-center mt-3 gap-3">
+            <button class="bg-yellow-400 text-white px-4 py-1 hover:rounded-lg rounded hover:bg-yellow-300 duration-300 hover:text-white">Reserve</button>
+          
+
         </div>
     </form>
   </fieldset>
 
     </div>
   </div>
-                    </div>
-
+ </div>
+ 
 
           
             </div>
+            @foreach($driversWithRoutes as $driver)
+            @foreach($driver->routes as $route)
             <div class="flex  w-full max-w-sm px-8 mx-auto lg:w-2/6">
                 <div class="flex-1">
                     <div class="mt-8">
@@ -165,7 +172,7 @@
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15a6 6 0 1 0 0-12 6 6 0 0 0 0 12Zm0 0v6M9.5 9A2.5 2.5 0 0 1 12 6.5"/>
                                           </svg>
                                     </div>
-                                    <input type="text" id="email-address-icon" class="bg-gray-50 border border-gray-300 text-gray-100 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Place of support">
+                                    <div class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 py-3 dark:text-gray-600 dark:focus:ring-blue-500 dark:focus:border-blue-500">{{$route->deparature}} </div>
                                 </div>                            
                             </div>
                             <div class="mt-6">
@@ -177,7 +184,7 @@
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.8 14h0a7 7 0 1 0-11.5 0h0l.1.3.3.3L12 21l5.1-6.2.6-.7.1-.2Z"/>
                                           </svg>
                                     </div>
-                                    <input type="text" id="email-address-icon" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Destination">
+                                    <div class="bg-gray-50 border border-gray-300 text-gray-100 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 py-3 dark:text-gray-600 dark:focus:ring-blue-500 dark:focus:border-blue-500"> {{$route->destination}}</div>
                                 </div>                            
                             </div>
     
@@ -185,6 +192,8 @@
                     </div>
                 </div>
             </div>
+            @endforeach
+            @endforeach
         </div>
     </div>
 </section>

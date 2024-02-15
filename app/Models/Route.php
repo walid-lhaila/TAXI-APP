@@ -13,5 +13,9 @@ class Route extends Model
         'destination',
     ];
 
+    public function driver()
+    {
+        return $this->belongsTo(drivers::class);
+    }
 
 }

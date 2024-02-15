@@ -14,21 +14,22 @@
                 <div class="max-w-3xl mx-auto py-10 px-4 sm:px-6 lg:py-12 lg:px-8">
                   <h1 class="text-3xl font-extrabold text-blue-gray-900">Profile</h1>
   
-                  <form method="POST" action="{{ route('driver.profile.update') }}" class="mt-6 space-y-8 divide-y divide-y-blue-gray-200">
+                  <form method="POST" action="{{ route('updateDriver') }}" enctype="multipart/form-data" class="mt-6 space-y-8 divide-y divide-y-blue-gray-200">
+                    @csrf
                     <div class="grid grid-cols-1 gap-y-6 sm:grid-cols-6 sm:gap-x-6">
   
                       <div class="sm:col-span-3">
                         <label for="" class="block text-sm font-medium text-blue-gray-900">
                           Name
                         </label>
-                        <input type="text" name="new_name" autocomplete="given-name" class="mt-1 block w-full border-gray-300 py-1 border-2 px-3 rounded-md shadow-sm text-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500" value="{{ old('new-matricule', auth()->check() ? auth()->user()->matricule : '') }}">
+                        <input type="text" name="new_name" autocomplete="given-name" class="mt-1 block w-full border-gray-300 py-1 border-2 px-3 rounded-md shadow-sm text-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500" value="{{ old('new-name', auth()->check() ? auth()->user()->name : '') }}">
                       </div>
   
                       <div class="sm:col-span-3">
                         <label for="" class="block text-sm font-medium text-blue-gray-900">
                           Username
                         </label>
-                        <input type="text" name="new_username" id="last-name" autocomplete="family-name" class="mt-1 block w-full border-gray-300 py-1 px-3 border-2 rounded-md shadow-sm text-blue-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500">
+                        <input type="text" name="new_username" id="last-name" autocomplete="family-name" class="mt-1 block w-full border-gray-300 py-1 px-3 border-2 rounded-md shadow-sm text-blue-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500" value="{{old('new-username', auth()->check() ? auth()->user()->username : '')}}">
                       </div>
   
                       <div class="sm:col-span-6">
@@ -66,7 +67,7 @@
                         <label class="block text-sm  font-medium text-blue-gray-900">
                           Phone
                         </label>
-                        <input type="text" name="new_phone" autocomplete="tel" class="mt-1 border-gray-300 py-1 px-3 border-2 block w-full border-blue-gray-300 rounded-md shadow-sm text-blue-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500">
+                        <input type="text" name="new_phone" autocomplete="tel" class="mt-1 border-gray-300 py-1 px-3 border-2 block w-full border-blue-gray-300 rounded-md shadow-sm text-blue-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500" value="{{old('new-phone', auth()->check() ? auth()->user()->phone : '')}}">
                       </div>
   
                       <div class="sm:col-span-3">
@@ -74,7 +75,7 @@
                           Type de Vehicule
                         </label>
                         <select id="vehicule" name="new_vehicule" autocomplete="country-name" class="mt-1 border-gray-300 py-1 px-3 border-2  block w-full border-blue-gray-300 rounded-md shadow-sm text-blue-gray-900 sm:text-sm focus:ring-blue-500 focus:border-blue-500">
-                          <option disabled selected>Choose a type</option>
+                          <option disabled selected value="{{old('new-vehicule', auth()->check() ? auth()->user()->vehicule : '')}}">{{old('new-vehicule', auth()->check() ? auth()->user()->vehicule : '')}}</option>
                           <option value="Petites voitures">Petites voitures</option>
                           <option value="Voitures compactes<">Voitures compactes</option>
                           <option value="Grosses voitures">Grosses voitures</option>
@@ -82,7 +83,7 @@
                         </select>
                       </div>
   
-                      <p class="text-sm text-blue-gray-500 sm:col-span-6">This account was created on <time datetime="2017-01-05T20:35:40">January 5, 2017, 8:35:40 PM</time>.</p>
+                      <p class="text-sm text-blue-gray-500 sm:col-span-6">This account was created on <span>{{auth()->check() ? auth()->user()->created_at : ''}}</span></p>
                     </div>
   
                     <div class="pt-8 flex justify-end">

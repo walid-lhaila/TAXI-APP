@@ -83,16 +83,16 @@
                         <p class="mt-3 text-gray-500 dark:text-gray-800 font-bold text-3xl">Order A Ride</p>
                     </div>
                     <div class="mt-8">
-                        <form id="routeForm">
+                        <form action="{{route('passengerSearch')}}" method="GET" id="routeForm">
                             <div>
-                                <label for="depart" class="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-600">Place of support</label>
+                                <label for="deparature" class="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-600">Place of support</label>
                                 <div class="relative">
                                     <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                                         <svg class="w-6 h-6 text-gray-800 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15a6 6 0 1 0 0-12 6 6 0 0 0 0 12Zm0 0v6M9.5 9A2.5 2.5 0 0 1 12 6.5"/>
                                           </svg>
                                     </div>
-                                    <input type="text" id="place-of-support" class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-600 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Place of support">
+                                    <input type="text" name="deparature" id="deparature" class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-600 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Place of support">
                                 </div>                            
                             </div>
                             <div class="mt-6">
@@ -104,12 +104,12 @@
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.8 14h0a7 7 0 1 0-11.5 0h0l.1.3.3.3L12 21l5.1-6.2.6-.7.1-.2Z"/>
                                           </svg>
                                     </div>
-                                    <input type="text" id="destination" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-600 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Destination">
+                                    <input type="text" id="destination" name="destination" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-600 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Destination">
                                 </div>                            
                             </div>
     
                             <div class="mt-6">
-                                <button type="button" onclick="calculateRoute()" class="w-full px-4 py-2 tracking-wide text-white transition-colors duration-300 transform bg-yellow-500 rounded-lg hover:bg-yellow-400 focus:outline-none focus:bg-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+                                <button type="submit" onclick="calculateRoute()" class="w-full px-4 py-2 tracking-wide text-white transition-colors duration-300 transform bg-yellow-500 rounded-lg hover:bg-yellow-400 focus:outline-none focus:bg-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50">
                                     Search
                                 </button>
                             </div>

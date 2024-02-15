@@ -26,6 +26,7 @@ class drivers extends Model implements Authenticatable
     return $this->hasMany(Route::class, 'driver_id');
 }
 
+
    
    
 }

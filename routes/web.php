@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DriversController;
 use App\Http\Controllers\PassengerController;
 use App\Http\Controllers\RouteController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 
     /*
@@ -32,8 +33,12 @@ use Illuminate\Support\Facades\Route;
 
                                 // LOGIN
     Route::post('login', [AuthController::class , 'login'])->name('login');
+
+
                                     // ADMIN
     Route::get('admin', [AdminController::class , 'index']);
+    Route::get('users', [AdminController::class , 'users']);
+    Route::get('routes', [AdminController::class , 'routes']);
 
                                     // 
     // Route::post('create-route', [RouteController::class, 'store'])->name('create.route');
@@ -49,14 +54,17 @@ use Illuminate\Support\Facades\Route;
     Route::get('passenger', [PassengerController::class , 'index']);
     Route::get('reserve' ,[PassengerController::class , 'create']);
 
-        Route::get('admin', [AdminController::class , 'index'])->name('admin.admin');
-        Route::get('driver', [DriversController::class, 'index'])->name('driver.driver');
-        Route::get('passenger', [PassengerController::class , 'index'])->name('passenger.passenger');
+    Route::get('admin', [AdminController::class , 'index'])->name('admin.admin');
+    Route::get('driver', [DriversController::class, 'index'])->name('driver.driver');
+    Route::get('passenger', [PassengerController::class , 'index'])->name('passenger.passenger');
 
 
 
-
+                                // SEARCH
+    Route::get('passengerSearch', [PassengerController::class, 'search'])->name('passengerSearch');
                                     
-        Route::middleware(['auth'])->group(function () {
-            Route::put('driver/profile/update', [DriversController::class, 'updateProfile'])->name('driver.profile.update');
-        });
+
+                                        // UPDATE DRIVER
+    Route::middleware(['auth:driver'])->group(function () {
+        Route::post('updateDriver', [DriversController::class, 'updateProfile'])->name('updateDriver');
+    });

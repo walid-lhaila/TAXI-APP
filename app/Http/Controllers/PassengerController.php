@@ -6,6 +6,7 @@ use App\Models\drivers;
 use App\Models\passenger;
 use App\Models\Route;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PassengerController extends Controller
 {
@@ -16,6 +17,27 @@ class PassengerController extends Controller
     {
         return view ('passenger.passenger');
     }
+    public function search(Request $request)
+    {
+        $placeOfSupport = $request->input('deparature');
+        $destination = $request->input('destination');
+
+        $driversWithRoutes = DB::table('drivers')
+        ->join('routes', 'drivers.id', '=', 'routes.driver_id')
+        ->where('routes.deparature', '=', $placeOfSupport)
+        ->where('routes.destination', '=', $destination)
+        ->select('drivers.*', 'routes.deparature', 'routes.destination')
+        ->get(); 
+
+        $driversWithRoutes = collect($driversWithRoutes)->map(function ($item) {
+            $item->routes = Route::where('driver_id', $item->id)->get();
+            return $item;
+        });
+
+        return view('passenger.reserve', compact('driversWithRoutes'));
+    }
+
+    
 
     /**
      * Show the form for creating a new resource.
