@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\drivers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use SebastianBergmann\CodeCoverage\Driver\Driver;
 
@@ -14,8 +16,11 @@ class DriversController extends Controller
      */
     public function index()
     {
-            $drivers = drivers::all();
-        return view('driver.driver', compact('drivers'));
+        $driver = Auth::guard('web')->user();
+
+        // Load the routes for the logged-in driver
+        $driver->load('routes');
+        return view('driver.driver', compact('driver'));
     }
 
     /**
@@ -68,30 +73,33 @@ class DriversController extends Controller
      */
     public function updateProfile(Request $request, drivers $drivers)
     {  
-        $driver = auth()->user();
+        $driver = Auth::guard('web')->user();
 
-        $request->validate([
-            'new_name' => 'required|string|max:255',
-            'new_username' => 'required|string|max:255',
-            'new_matricule' => 'required|string|max:255',
-            'new_phone' => 'required|string|max:255',
-            'new_vehicle' => 'required|string|max',
-
-        ]);
+        // $request->validate([
+        //     'new_name' => 'required|string|max:255',
+        //     'new_username' => 'required|string|max:255',
+        //     'new_matricule' => 'required|string|max:255',
+        //     'new_phone' => 'required|string|max:255',
+        //     'new_vehicle' => 'required|string|max',
+        // ]);
     
-        $driver = auth()->user();
         $driver->name = $request->input('new_name');
         $driver->username = $request->input('new_username');
         $driver->matricule = $request->input('new_matricule');
         $driver->phone = $request->input('new_phone');
         $driver->vehicule = $request->input('new_vehicule');
 
+        if ($request->hasFile('image')) {
+            // Delete the old image if it exists
+            Storage::disk('public')->delete($driver->image);
+
+            // Store the new image
+            $imagePath = $request->file('new_image')->store('images', 'public');
+            $driver->image = $imagePath;
+        }
 
         $driver->save();
             
-            // Update other fields as needed
-        
-    
         return redirect('driver')->with('success', 'Profile Updated Successfully');
     }
 

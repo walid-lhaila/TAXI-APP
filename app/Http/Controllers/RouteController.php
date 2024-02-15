@@ -30,16 +30,25 @@ class RouteController extends Controller
      */
     public function store(Request $request)
     {
-        $validateData = $request->validate([
-            'departure' => 'required',
-            'destination' => 'required',
+        // Validate your form data
+        $request->validate([
+            'deparature' => 'required|string',
+            'destination' => 'required|string',
+            
+            'driver_id' => 'required|exists:drivers,id',
         ]);
-        
-
-        $validatedData['driver_id'] = Auth::guard('driver')->id();
-        Route::create($validatedData);
-
-        return redirect()->route('auth.login')->with('success', 'Route created successfully');
+    
+        // Create the route
+        Route::create([
+            'deparature' => $request->input('deparature'),
+            'destination' => $request->input('destination'),
+            'date_depart' => $request->input('depart'),
+            'date_arrive' => $request->input('arrive'),
+            'driver_id' => $request->input('driver_id'),
+        ]);
+    
+        return redirect()->back()->with('success', 'Route added successfully');
+       
     }
 
     /**

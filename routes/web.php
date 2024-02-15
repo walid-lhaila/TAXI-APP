@@ -40,8 +40,8 @@ use Illuminate\Support\Facades\Route;
     Route::get('users', [AdminController::class , 'users']);
     Route::get('routes', [AdminController::class , 'routes']);
 
-                                    // 
-    // Route::post('create-route', [RouteController::class, 'store'])->name('create.route');
+                                    // ADD ROUTE
+    Route::post('routes.store', [RouteController::class, 'store'])->name('routes.store');
 
 
                                     // DRIVER
@@ -65,6 +65,6 @@ use Illuminate\Support\Facades\Route;
                                     
 
                                         // UPDATE DRIVER
-    Route::middleware(['auth:driver'])->group(function () {
-        Route::post('updateDriver', [DriversController::class, 'updateProfile'])->name('updateDriver');
+    Route::middleware(['auth:web'])->group(function () {
+        Route::post('updateProfile', [DriversController::class, 'updateProfile'])->name('updateProfile');
     });

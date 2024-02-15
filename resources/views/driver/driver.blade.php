@@ -46,7 +46,7 @@
                       <button id="btnCard"  type="button" class="bg-white rounded-full flex focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                       <img class="h-8 w-8 rounded-full" src="{{url('img/avatar.png')}}" alt="">
                       </button>
-                      <h1 class="text-white font-medium mt-1 text-lg"></h1>
+                      <h1 class="text-white font-medium mt-1 text-lg">{{ auth()->guard('web')->user()->name }}</h1>
                   </div>
                 
                   <div id="dropDown"  class="origin-top-right absolute z-10 right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 py-1 focus:outline-none scale-0">
@@ -70,7 +70,7 @@
     <div class="w-full bg-center bg-cover h-[649px]" style="background-image: url('img/bgDriver.jpg');">
 <div class="flex">
       <div class="form">
-  <div class=" absolute mt-20 flex  justify-start bg-gray-900/40">
+  <div class=" absolute mt-4 flex  justify-start bg-gray-900/40">
           <div class="ml-5 bg-yellow-400 shadow-lg rounded   w-[300px]">
             <h3 class="mb-2 font-medium text-xl text-gray-900 text-center dark:text-white py-1">Statut</h3>
         <form action="">
@@ -98,22 +98,24 @@
      
 
 
-      <div class="mt-[350px] ml-5 bg-yellow-400 absolute rounded w-[300px]">
+      <div class="mt-[230px] ml-5 bg-yellow-400 absolute rounded w-[300px]">
         <h3 class="mb-2 font-medium text-xl text-gray-900 text-center dark:text-white py-1">Route</h3>
-        <form>
+        <form action="{{route('routes.store')}}" method="POST">
+          @csrf
+          <input type="hidden" name="driver_id" value="{{ auth()->guard('web')->user()->id }}">
             <div class="flex justify-center flex-col ml-10">
-                <label for="depart" class="block mb-2 text-sm font-medium text-gray-100 dark:text-gray-100">Place of support</label>
+                <label for="deparature" class="block mb-2 text-sm font-medium text-gray-100 dark:text-gray-100">Place of support</label>
                 <div class="relative">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                         <svg class="w-6 h-6 text-gray-800 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15a6 6 0 1 0 0-12 6 6 0 0 0 0 12Zm0 0v6M9.5 9A2.5 2.5 0 0 1 12 6.5"/>
                           </svg>
                     </div>
-                    <input type="text" id="email-address-icon" class="bg-gray-50 border border-gray-300 text-gray-100 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-56 ps-10 p-2.5  dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Place of support">
+                    <input type="text" name="deparature" class="bg-gray-50 border border-gray-300 text-gray-100 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-56 ps-10 p-2.5  dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-500 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Place of support">
                 </div>                            
             </div>
             <div class="flex justify-center flex-col ml-10 mt-2">
-                <label for="destination" class="text-sm text-gray-600 font-medium dark:text-gray-100">Destination</label>
+                <label for="destination" class="text-sm mb-2 text-gray-600 font-medium dark:text-gray-100">Destination</label>
                 <div class="relative">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
                         <svg class="w-6 h-6 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -121,10 +123,32 @@
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.8 14h0a7 7 0 1 0-11.5 0h0l.1.3.3.3L12 21l5.1-6.2.6-.7.1-.2Z"/>
                           </svg>
                     </div>
-                    <input type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-56 ps-10 p-2.5  dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Destination">
+                    <input type="text" name="destination" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-56 ps-10 p-2.5  dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-500 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Destination">
                 </div> 
+                <div class="flex justify-center flex-col mt-2">
+                  <label for="depart" class="block mb-2 text-sm font-medium text-gray-100 dark:text-gray-100">Date de Depart</label>
+                  <div class="relative">
+                      <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                          <svg class="w-6 h-6 text-gray-800 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15a6 6 0 1 0 0-12 6 6 0 0 0 0 12Zm0 0v6M9.5 9A2.5 2.5 0 0 1 12 6.5"/>
+                            </svg>
+                      </div>
+                      <input type="datetime-local" name="depart" id="depart" class="bg-gray-50 border border-gray-300 text-gray-100 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-56 ps-10 p-2.5  dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-500 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Place of support" min="{{ now()->format('Y-m-d\TH:i') }}">
+                  </div>                            
+              </div>
+              <div class="flex justify-center flex-col mt-2">
+                <label for="arrive" class="block mb-2 text-sm font-medium text-gray-500 dark:text-gray-100">Date D'arrive</label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                        <svg class="w-6 h-6 text-gray-800 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15a6 6 0 1 0 0-12 6 6 0 0 0 0 12Zm0 0v6M9.5 9A2.5 2.5 0 0 1 12 6.5"/>
+                          </svg>
+                    </div>
+                    <input type="datetime-local" name="arrive" id="arrive" class="bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-56 ps-10 p-2.5  dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-500 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Place of support">
+                </div>                            
+            </div>
                 <div class="flex justify-center py-2 mr-8 mt-3">
-                  <button class="bg-gray-200 hover:bg-gray-100 font-medium text-gray-800 px-4 py-1 rounded">Change</button>
+                  <button type="submit" class="bg-gray-200 hover:bg-gray-100 font-medium text-gray-800 px-4 py-1 rounded">Add</button>
                 </div>                           
             </div>
 
@@ -134,12 +158,23 @@
 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
     <!-- Replace with your content -->
-    <div class="py-4">
-      <div class="ml-[450px] mt-[65px] border-4 bg-yellow-400 border-dashed border-gray-100  rounded-lg h-[500px] w-[840px]">
+    <div class="py-2">
+      <div class="ml-[450px] mt-[4px] border-4 bg-yellow-400 border-dashed border-gray-100  rounded-lg h-[620px] w-[840px]">
         <h1 class="mb-2 font-medium text-xl text-gray-900 text-center dark:text-white py-1">Road History</h1>
-
-        
-      </div>
+        <div class=" py-8">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+              @foreach ($driver->routes as $route)
+                  <div class="relative rounded-lg border border-gray-300 bg-gray-100 px-6 py-5 shadow-sm flex justify-between w-[218px] space-x-3 hover:border-gray-400 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+                      <div class="mt-1 font-medium text-md">{{ $route->deparature }}</div>
+                      <div> <img class="h-[35px] w-[40px]" src="{{ url('img/arrow.png') }}" alt=""></div>
+                      <div class="mt-1 font-medium text-md">{{ $route->destination }}</div>
+                  </div>
+              @endforeach
+          </div>
+          </div>
+        </div>
+      </div>  
     </div>
     <!-- /End replace -->
   </div>
@@ -150,7 +185,17 @@
   
     </div>
 
-    
+    <script>
+      const departureInput = document.querySelector('input[name="depart"]');
+       const arrivalInput = document.querySelector('input[name="arrive"]');
+
+       departureInput.addEventListener('input', function () {
+           const selectedDate = new Date(this.value);
+           selectedDate.setMinutes(selectedDate.getMinutes() + 1);
+           const formattedDate = selectedDate.toISOString().slice(0, 16);
+           arrivalInput.min = formattedDate;
+       });
+    </script>
 
 <script src="{{url('js/card.js')}}"></script>
 

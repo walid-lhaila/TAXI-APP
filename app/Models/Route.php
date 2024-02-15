@@ -11,6 +11,9 @@ class Route extends Model
     protected $fillable = [
         'deparature',
         'destination',
+        'driver_id',
+        'date_depart',
+        'date_arrive',
     ];
 
     public function driver()
